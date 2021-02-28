@@ -1,10 +1,14 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
 using Entities.DTOs;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,17 +20,16 @@ namespace Business.Concrete
         // injection iş sınıfı başka iş sınıfını newlemez, injection önemli
         IProductDal _productDal;
 
-        public ProductManager(IProductDal productDal)   
+        public ProductManager(IProductDal productDal)
         {
             this._productDal = productDal;
         }
 
+        [ValidationAspect(typeof(ProductValidator))]
         public IResult Add(Product product)
         {
-            if (product.ProductName.Length < 2)
-            {
-                return new ErrorResult(Messages.ProductNameInvalid);
-            }
+
+      //    ValidationTool.Validate(new ProductValidator(), product);
 
             this._productDal.Add(product);
             return new SuccessResult(Messages.ProductAdded);
@@ -70,7 +73,7 @@ namespace Business.Concrete
                 return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails());
             }
 
-            
+
         }
     }
 }
