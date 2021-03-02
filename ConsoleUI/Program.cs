@@ -9,40 +9,40 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            ProductTest();
+            //ProductTest();
             //CategoryTest();
 
 
         }
 
-        private static void CategoryTest()
-        {
-            CategoryManager cm = new CategoryManager(new EfCategoryDal());
-            foreach (var category in cm.GetAll())
-            {
-                Console.WriteLine(category.CategoryName);
-            }
-        }
+        //private static void CategoryTest()
+        //{
+        //    CategoryManager cm = new CategoryManager(new EfCategoryDal());
+        //    foreach (var category in cm.GetAll())
+        //    {
+        //        Console.WriteLine(category.CategoryName);
+        //    }
+        //}
 
-        private static void ProductTest()
-        {
-            ProductManager pm = new ProductManager(new EfProductDal());
+        //private static void ProductTest()
+        //{
+        //    ProductManager pm = new ProductManager(new EfProductDal());
 
-            var result = pm.GetProductDetails();
+        //    var result = pm.GetProductDetails();
 
-            if (result.Success)
-            {
-                foreach (var product in result.Data)
-                {
-                    Console.WriteLine(product.ProductName + "/" + product.CategoryName);
-                }
-            }
-            else
-            {
-                Console.WriteLine(result.Message);
-            }
+        //    if (result.Success)
+        //    {
+        //        foreach (var product in result.Data)
+        //        {
+        //            Console.WriteLine(product.ProductName + "/" + product.CategoryName);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine(result.Message);
+        //    }
 
             
-        }
+        //}
     }
 }
