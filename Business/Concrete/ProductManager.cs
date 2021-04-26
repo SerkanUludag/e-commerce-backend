@@ -34,7 +34,8 @@ namespace Business.Concrete
         }
 
         // Cross cutting concerns here
-       // [SecuredOperation("product.add, admin")]
+        // claim
+        [SecuredOperation("product.add, admin")]
         [ValidationAspect(typeof(ProductValidator))]
         [CacheRemoveAspect("IProductService.Get")]
         public IResult Add(Product product)
